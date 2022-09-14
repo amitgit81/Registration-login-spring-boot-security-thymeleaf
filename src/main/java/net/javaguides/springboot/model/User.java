@@ -18,38 +18,34 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 
 @Entity
-@Table (name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email" ))
-public class User 
-{
+@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+public class User {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name="first_name")
+
+	@Column(name = "first_name")
 	private String firstName;
-	
-	@Column(name="last_name")
+
+	@Column(name = "last_name")
 	private String lastName;
-	
+
 	private String email;
-	
+
 	private String password;
-	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL 	)
-	@JoinTable( name = "users_roles",
-				joinColumns = @JoinColumn(name = "user_id", referencedColumnName="id"),
-				inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName="id")
-			
-			)
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+
+	)
 	private Collection<Role> roles;
-	
-	public User()
-	{
-		
+
+	public User() {
+
 	}
-	
-	public User(String firstName, String lastName, String email, String password, Collection<Role> roles) 
-	{
+
+	public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -105,6 +101,4 @@ public class User
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
-	
- 
 }
